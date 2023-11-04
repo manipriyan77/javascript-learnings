@@ -7,6 +7,7 @@ const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
+const nav = document.querySelector('.nav');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -88,3 +89,22 @@ document.querySelector('.operations__tab-container').addEventListener('click', f
     .querySelector(`.operations__content--${clickedButton.dataset.tab}`)
     .classList.add('operations__content--active');
 });
+
+// Menu fade animations
+
+const opacityHandler = function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    const clickedLink = e.target;
+    const siblings = clickedLink.closest('.nav').querySelectorAll('.nav__link');
+    const logo = clickedLink.closest('.nav').querySelector('img');
+    siblings.forEach((el) => {
+      if (el !== clickedLink) el.style.opacity = this;
+    });
+    logo.style.opacity = this;
+    console.log('siblings :>> ', siblings);
+  }
+};
+
+nav.addEventListener('mouseover', opacityHandler.bind(0.5));
+
+nav.addEventListener('mouseout', opacityHandler.bind(1));
