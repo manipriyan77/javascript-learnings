@@ -37,11 +37,36 @@ const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 
 btnScrollTo.addEventListener('click', function (e) {
-  const s1coords = section1.getBoundingClientRect();
+  // const s1coords = section1.getBoundingClientRect();
   // console.log('s1coords :>> ', s1coords);
   // scrollTo(s1coords.left, s1coords.top);
   // window.scrollTo({
   //   left:s1coords.left+window.pageXOffset
   // })
   section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollTo.scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+// !!BASED ON THE ABBOVE APPROACH THE FUNCTION HAS TO BE CREATED N TIMES BASED ON THE NUMBER OF LINKS TO RESOLVE THIS WE CAN USE
+// !! EVENT DELIGATION
+// 1.Add event listener to the commom parent element
+// 2.Find which element orginated that event
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  // Stragey to find the matching element
+  console.log('id :>> ', e.target);
+  e.preventDefault();
+
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+    console.log('id :>> ', this);
+  }
 });
