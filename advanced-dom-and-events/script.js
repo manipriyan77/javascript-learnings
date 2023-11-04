@@ -1,12 +1,12 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -69,4 +69,22 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
     console.log('id :>> ', this);
   }
+});
+
+document.querySelector('.operations__tab-container').addEventListener('click', function (e) {
+  console.log('e.target :>> ', e.target.closest('.operations__tab'));
+  const clickedButton = e.target.closest('.operations__tab');
+  if (!clickedButton) return;
+
+  // Remove active classes
+  tabs.forEach((t) => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach((c) => c.classList.remove('operations__content--active'));
+
+  // Activate tab
+  clickedButton.classList.add('operations__tab--active');
+
+  // Activate content area
+  document
+    .querySelector(`.operations__content--${clickedButton.dataset.tab}`)
+    .classList.add('operations__content--active');
 });
