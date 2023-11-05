@@ -81,6 +81,9 @@ class PersonClass {
   fullName() {
     console.log(this.firstName + this.lastName);
   }
+  get getFullName() {
+    return this.firstName + ' ' + this.lastName;
+  }
 }
 
 const hari = new PersonClass('hari', 'GS');
@@ -91,6 +94,7 @@ PersonClass.prototype.greet = function () {
   console.log(`Hey ${this.firstName}`);
 };
 hari.greet();
+console.log(hari.getFullName, 'getter');
 
 // 1. Classes are NOT hoisted
 // 2. Classes are first-class citizens
